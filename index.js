@@ -26,3 +26,33 @@ class User {
         return `${this.firstName} ${this.lastName}`;
     }
 }
+
+
+class Student extends User {
+    /**
+     *
+     * @param {string} name
+     * @param {string} surname
+     * @param {number} year
+     */
+    constructor(name, surname, year) {
+        super(name, surname);
+        this.year = year
+    }
+
+    getCourse() {
+        let date = new Date().getFullYear()
+        let course = date - this.year + 1
+        if (course < 1) {
+            throw new RangeError('you are probably just a future student')
+        }
+        if (course > 5) {
+            throw new RangeError('you are probably no longer a student')
+        }
+        return `student ${this.getFullName()} studying at ${course} course`
+    }
+}
+
+const vasya = new Student('Vasiliy', "Pupkin", 2014)
+console.log(vasya.getFullName())
+console.log(vasya.getCourse())
